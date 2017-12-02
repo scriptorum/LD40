@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 	public Transform groundCheck;
 	private Rigidbody2D rb;
 	private SpriteRenderer sr;
+	private const float WEIGHT_PENALTY = 25; // Higher numbers is more forgiving, do not go below max inventory size
 	private const float maxSpeed = 5f;
 	private float walkForce = 200f;
 	private float floatForce = 50f;
@@ -35,9 +36,12 @@ public class PlayerMovement : MonoBehaviour
 
 		if (onGround && jumping)
 		{
-			SoundManager.instance.Play("jump");
-			rb.AddForce(new Vector2(0f, jumpForce));
+            int weight = Inventory.instance.GetGoldWeight();
+            float actualJumpForce = jumpForce * (1 - weight / WEIGHT_PENALTY);
+			Debug.Log("Actual jump force:" + actualJumpForce + " Gold Weight:" + Inventory.instance.GetGoldWeight());
+			rb.AddForce(new Vector2(0f, actualJumpForce));
 			onGround = false;
+			SoundManager.instance.PlayAs("jump", 1.2f - weight * 0.1f, 0.8f);
 		}
 
 	

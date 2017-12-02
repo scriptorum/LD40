@@ -25,7 +25,7 @@ public class Inventory : MonoBehaviour
 
     public void Pickup(Gold g)
     {
-        SoundManager.instance.Play("pickup");
+        SoundManager.instance.PlayAs("pickup", 1.2f - Inventory.instance.GetGoldWeight() * 0.1f, 0.8f);
         contents.Add(g);
         UpdateSlots();
     }
@@ -38,5 +38,16 @@ public class Inventory : MonoBehaviour
 				slots[i].SetContent(contents[i]);
 			else slots[i].Empty();
         }
+    }
+
+    public void Reset()
+    {
+        contents.Clear();
+        UpdateSlots();
+    }
+
+    public int GetGoldWeight()
+    {
+        return contents.Count; // TODO Bags of different weight
     }
 }
