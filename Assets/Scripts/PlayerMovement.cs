@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
 	private float walkForce = 200f;
 	private float floatForce = 50f;
 	private float jumpForce = 400f;
-	private bool onGround = false;
+	private float lastOnGround = 0;
 	private bool jumping = false;
 
     void Awake()
@@ -27,21 +27,23 @@ public class PlayerMovement : MonoBehaviour
 	void Update()
 	{
 		jumping = Input.GetKey(KeyCode.Space);
-		onGround = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+		if(Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground")))
+			lastOnGround = Time.realtimeSinceStartup;
 	}
 
 	void FixedUpdate()
 	{
 		float x = Input.GetAxis("Horizontal");
 
-		if (onGround && jumping)
+		bool onGround = (Time.realtimeSinceStartup - lastOnGround) < 0.1f;
+		if (onGround && jumping && rb.velocity.y < 0.025f)
 		{
+			rb.velocity = new Vector3(rb.velocity.x, 0f);
             int weight = Inventory.instance.GetGoldWeight();
             float actualJumpForce = jumpForce * (1 - weight / WEIGHT_PENALTY);
-			Debug.Log("Actual jump force:" + actualJumpForce + " Gold Weight:" + Inventory.instance.GetGoldWeight());
 			rb.AddForce(new Vector2(0f, actualJumpForce));
-			onGround = false;
 			SoundManager.instance.PlayAs("jump", 1.2f - weight * 0.1f, 0.8f);
+			onGround = false;
 		}
 
 	

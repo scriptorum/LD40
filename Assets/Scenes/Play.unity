@@ -123,7 +123,7 @@ GameObject:
   m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -982381405332843317, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -134,7 +134,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 114496504}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.599, z: 0}
+  m_LocalPosition: {x: 0, y: -0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1753139514}
@@ -185,16 +185,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4267823936704090, guid: 067957c25635a4eecb7271ef7aa32176, type: 2}
       propertyPath: m_LocalScale.x
-      value: 6.456563
-      objectReference: {fileID: 0}
-    - target: {fileID: 4267823936704090, guid: 067957c25635a4eecb7271ef7aa32176, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.64687425
-      objectReference: {fileID: 0}
-    - target: {fileID: 114480155842343398, guid: 067957c25635a4eecb7271ef7aa32176,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
+      value: 1.7755477
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 067957c25635a4eecb7271ef7aa32176, type: 2}
@@ -425,6 +416,10 @@ Prefab:
       propertyPath: m_Name
       value: Platform (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4267823936704090, guid: 067957c25635a4eecb7271ef7aa32176, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 2.4212112
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 067957c25635a4eecb7271ef7aa32176, type: 2}
   m_IsPrefabParent: 0
@@ -470,6 +465,10 @@ Prefab:
     - target: {fileID: 1042260522981864, guid: 067957c25635a4eecb7271ef7aa32176, type: 2}
       propertyPath: m_Name
       value: Platform (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4267823936704090, guid: 067957c25635a4eecb7271ef7aa32176, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.8070719
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 067957c25635a4eecb7271ef7aa32176, type: 2}
@@ -69594,7 +69593,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4509686379708334, guid: 19fb424e3580048029388f8a47635778, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.003
+      value: 5.08
       objectReference: {fileID: 0}
     - target: {fileID: 4509686379708334, guid: 19fb424e3580048029388f8a47635778, type: 2}
       propertyPath: m_LocalPosition.y
@@ -69640,7 +69639,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4267823936704090, guid: 067957c25635a4eecb7271ef7aa32176, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -4.3
+      value: -5.11
       objectReference: {fileID: 0}
     - target: {fileID: 4267823936704090, guid: 067957c25635a4eecb7271ef7aa32176, type: 2}
       propertyPath: m_LocalPosition.y
@@ -69677,6 +69676,10 @@ Prefab:
     - target: {fileID: 4267823936704090, guid: 067957c25635a4eecb7271ef7aa32176, type: 2}
       propertyPath: m_LocalScale.y
       value: 0.13140616
+      objectReference: {fileID: 0}
+    - target: {fileID: 4267823936704090, guid: 067957c25635a4eecb7271ef7aa32176, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 3.0668647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 067957c25635a4eecb7271ef7aa32176, type: 2}
@@ -69899,6 +69902,10 @@ Prefab:
     - target: {fileID: 1042260522981864, guid: 067957c25635a4eecb7271ef7aa32176, type: 2}
       propertyPath: m_Name
       value: Platform (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4267823936704090, guid: 067957c25635a4eecb7271ef7aa32176, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.2106057
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 067957c25635a4eecb7271ef7aa32176, type: 2}
