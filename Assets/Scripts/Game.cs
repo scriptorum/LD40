@@ -32,18 +32,29 @@ public class Game : MonoBehaviour
     {
 		player.SetActive(false);
 		portal.Appear();
+		timer.SetTime(level.timer);
 		aq.Delay(0.9f);
 		aq.Add(() => 
 		{
 			player.transform.position = portal.transform.position;
 			player.SetActive(true);
+			timer.StartTimer();
 		});
 		aq.Run();
     }
 
     public void Escape()
     {
+		timer.StopTimer();
         player.SetActive(false);
 		portal.Disappear();
+		aq.Delay(1f);
+		aq.Add(() => NextLevel());
+		aq.Run();
+    }
+
+    private void NextLevel()
+    {
+        StartLevel();
     }
 }

@@ -244,6 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numBags: 0
+  timer: 15
 --- !u!1 &297553151
 GameObject:
   m_ObjectHideFlags: 0
@@ -70776,7 +70777,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c3fb7bc6db44b1cb0fcff33eebadad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portal: {fileID: 1720177029}
 --- !u!1001 &1774472446
 Prefab:
   m_ObjectHideFlags: 0
