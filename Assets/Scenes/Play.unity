@@ -70417,7 +70417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tm: {fileID: 981742984}
-  view: {fileID: 981742983}
+  col: {fileID: 0}
 --- !u!1001 &1743933956
 Prefab:
   m_ObjectHideFlags: 0
@@ -70854,6 +70854,22 @@ MonoBehaviour:
     livePreview: 0
     clips:
     - {fileID: 8300000, guid: 17994c9448bc34701bae330a1ea4dca2, type: 3}
+    pitch: 1
+    pitchVariation: 0
+    volume: 0.8
+    volumeVariation: 0.05
+    pan: 0
+    panVariation: 0
+    looping: 0
+    usePool: 1
+    multi: 0
+    delay: 0
+    source: {fileID: 0}
+    group: {fileID: 0}
+  - name: portal
+    livePreview: 0
+    clips:
+    - {fileID: 8300000, guid: 269295f3c16b74957a7354f89d3c432c, type: 3}
     pitch: 1
     pitchVariation: 0
     volume: 0.8
