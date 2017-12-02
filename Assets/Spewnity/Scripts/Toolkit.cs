@@ -209,6 +209,7 @@ namespace Spewnity
             return GetFullPath(o.transform);
         }
 
+
         /// <summary>
         /// Removes an item from the front of a collection and returns the item
         /// </summary>
@@ -572,7 +573,8 @@ namespace Spewnity
             var enumerable = Toolkit.GetObjectField(source, name) as IEnumerable;
             var enm = enumerable.GetEnumerator();
             while (index-- >= 0)
-                enm.MoveNext();
+                if(!enm.MoveNext())
+                    return null;
             return enm.Current;
         }
 #endif
