@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
 		if (onGround && jumping)
 		{
+			SoundManager.instance.Play("jump");
 			rb.AddForce(new Vector2(0f, jumpForce));
 			onGround = false;
 		}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Spewnity;
 
 public class Inventory : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Inventory : MonoBehaviour
 
 	public void Pickup(Gold g)
 	{
+		SoundManager.instance.Play("pickup");
 		contents.Add(g);
 	}
 }
