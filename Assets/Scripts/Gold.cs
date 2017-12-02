@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Gold : MonoBehaviour
 {
+	void Awake()
+	{
+		Game.instance.level.numBags++;
+	}
+
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if(other.tag == "Player")
@@ -12,6 +17,7 @@ public class Gold : MonoBehaviour
 
 	void PickupGold()
 	{
+		Game.instance.level.numBags--;
 		Inventory.instance.Pickup(this);
 		Destroy(gameObject);
 	}

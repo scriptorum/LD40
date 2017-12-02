@@ -6,17 +6,17 @@ using UnityEngine;
 public class Portal : MonoBehaviour
 {
 	public TweenManager tm;
-	public CircleCollider2D col;
+	private CircleCollider2D col;
 
 	void Awake()
 	{
 		tm.ThrowIfNull();
 		gameObject.SelfAssign(ref col);
+		col.enabled = false;
 	}
 
 	void Start()
 	{
-		Appear();
 	}
 
 	public void Appear()
@@ -28,19 +28,9 @@ public class Portal : MonoBehaviour
 
 	public void Disappear()
 	{
+		SoundManager.instance.Play("portal");
 		col.enabled = false;
 		tm.Play("disappear");
 
-	}
-	
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.tag != "Player")
-			return;
-
-		Debug.Log("Player entered the portal!");
-
-		SoundManager.instance.Play("portal");
-		Disappear();
 	}
 }

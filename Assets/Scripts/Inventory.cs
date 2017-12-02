@@ -30,6 +30,14 @@ public class Inventory : MonoBehaviour
         UpdateSlots();
     }
 
+    public List<Gold> TakeBags()
+    {
+        List<Gold> temp = contents;
+        contents = new List<Gold>();
+        UpdateSlots();
+        return temp;
+    }
+
     private void UpdateSlots()
     {
         for (int i = 0; i < slots.Count; i++)
