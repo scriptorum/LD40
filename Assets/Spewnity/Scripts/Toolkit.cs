@@ -497,6 +497,12 @@ namespace Spewnity
             return bounds;
         }
 
+        public static void SelfAssign<T>(this GameObject go, ref T component) where T:Component
+        {
+            component = go.GetComponent<T>();
+            component.ThrowIfNull();
+        }
+
 #if UNITY_EDITOR        
         /// <summary>
         /// Returns the object associated with the SerializedProperty.
