@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 	private SpriteRenderer sr;
 	private const float maxSpeed = 5f;
 	private float walkForce = 200f;
-	private float floatMultiplier = 0.2f;
+	private float floatForce = 50f;
 	private float jumpForce = 400f;
 	private bool onGround = false;
 	private bool jumping = false;
@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 	
-		float curForce = onGround ? walkForce : walkForce * floatMultiplier;
+		float curForce = onGround ? walkForce : floatForce;
 		rb.AddForce(Vector2.right * x * curForce);
 
 		if (Mathf.Abs(rb.velocity.x) > maxSpeed)
