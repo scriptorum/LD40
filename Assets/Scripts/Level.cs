@@ -1,45 +1,109 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Spewnity;
+using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-	public int numBags = 0; // automatically populated 
-	public int timer = 30;
+	public GameObject platformPrefab;
+	public GameObject goldPrefab;
 
-	public string ToJson()
+	public int numBags = 0;
+	public int level = 0;
+
+	public LevelData data;
+	private TextAsset asset;
+
+	#if UNITY_EDITOR
+	void OnValidate()
 	{
-		string result = "{";
-		string comma = "";
-		result += "\"platform\": [";
-		foreach(GameObject go in GameObject.FindGameObjectsWithTag("platform"))
+		if(Application.isPlaying)
 		{
-			result += comma;
-			comma = ",";
-			result += "{";
-			result += "\"position\": " + JsonUtility.ToJson(go.transform.localPosition) + ",";
-			result += "\"size\": " + JsonUtility.ToJson(go.GetComponent<SpriteRenderer>().size);			
- 			result += "}";
+			Refresh();			
 		}
-		result += "],";
-
-		comma = "";
-		result += "\"gold\": [";
-		foreach(GameObject go in GameObject.FindGameObjectsWithTag("gold"))
-		{
-			result += comma;
-			comma = ",";
-			result += "{";
-			result += "\"position\": " + JsonUtility.ToJson(go.transform.localPosition);
-			result += "}";
-		}
-		result += "],";
-
-		result += "\"portal\": " + JsonUtility.ToJson(GameObject.FindGameObjectWithTag("portal").transform.localPosition);
-
-		result += "}";
-
-		return result;
 	}
+	#endif
+
+	public void Load()
+	{
+		string path = "level1";
+		Debug.Log("Loading asset " + path);
+		transform.GetChild("Platforms").DestroyChildren();
+		transform.GetChild("Gold").DestroyChildren();
+		asset = Resources.Load(path) as TextAsset;
+		data = JsonUtility.FromJson<LevelData>(asset.text);
+		ProcessLevelData();
+	}
+
+	public void Refresh()
+	{
+		transform.GetChild("Platforms").DestroyChildren();
+		transform.GetChild("Gold").DestroyChildren();
+		ProcessLevelData();
+	}
+
+	public void ProcessLevelData()
+	{
+		Transform portal = transform.GetChild("Portal");
+		Transform platforms = transform.GetChild("Platforms");
+		Transform gold = transform.GetChild("Gold");
+
+		portal.position = new Vector3(data.portal.x, data.portal.y);
+
+		foreach (PlatformData pd in data.platforms)
+		{
+			GameObject pgo = platformPrefab.CreateChild(platforms);
+			pgo.transform.localPosition = new Vector3(pd.position.x, pd.position.y);
+			pgo.GetComponent<SpriteRenderer>().size = pd.size;
+			BoxCollider2D pgocol = pgo.GetComponent<BoxCollider2D>();
+			pgocol.size = pd.size;
+			pgocol.offset = new Vector2(pgocol.offset.x, (pd.size.y - pd.size.y) / 2);
+		}
+
+		numBags = 0;
+		foreach (GoldData gd in data.gold)
+		{
+			GameObject ggo = goldPrefab.CreateChild(gold);
+			ggo.transform.localPosition = new Vector3(gd.position.x, gd.position.y);
+			ggo.GetComponent<Gold>().weight = gd.weight;
+			numBags++;
+		}
+	}
+
+	public void Save()
+	{		
+		Resources.UnloadAsset(asset);
+		string path = "Assets/Resources/level1.json";
+		Debug.Log("Save level:" + path);
+		System.IO.File.Delete(path);
+		System.IO.StreamWriter sw = System.IO.File.CreateText(path);
+		string json = JsonUtility.ToJson(data);
+		sw.Write(json);
+		sw.Close();
+	}
+
+}
+
+[System.Serializable]
+public class LevelData
+{
+	public int timer = 30;
+	public List<PlatformData> platforms;
+	public List<GoldData> gold;
+	public Vector2 portal;
+}
+
+[System.Serializable]
+public struct PlatformData
+{
+	public Vector2 position;
+	public Vector2 size;
+}
+
+[System.Serializable]
+public struct GoldData
+{
+	public Vector2 position;
+	public int weight;
 }

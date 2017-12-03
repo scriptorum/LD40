@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    public static Game instance;
-    public Portal portal;
+	public static Game instance;
+	public Portal portal;
 	public TimerUI timer;
 	public GameObject player;
 	public Level level;
@@ -28,39 +28,59 @@ public class Game : MonoBehaviour
 		StartLevel();
 	}
 
-    private void StartLevel()
-    {
+	private void Reset()
+	{
+		RestartLevel();
+	}
+
+	private void StartLevel()
+	{
+		level.Load();
+		RestartLevel();
+	}
+
+	private void RestartLevel()
+	{
+		Inventory.instance.Reset();
 		player.SetActive(false);
 		portal.Appear();
-		timer.SetTime(level.timer);
+		timer.SetTime(level.data.timer);
 		aq.Delay(0.9f);
-		aq.Add(() => 
+		aq.Log("Revealing player");
+		aq.Add(() =>
 		{
 			player.transform.position = portal.transform.position;
 			player.SetActive(true);
 			timer.StartTimer();
 		});
 		aq.Run();
-    }
+	}
 
-    public void Escape()
-    {
+	public void Escape()
+	{
 		timer.StopTimer();
-        player.SetActive(false);
+		player.SetActive(false);
 		portal.Disappear();
 		aq.Delay(1f);
+		aq.Log("Escaped! Loading next level");
 		aq.Add(() => NextLevel());
 		aq.Run();
-    }
+	}
 
-    private void NextLevel()
-    {
-        StartLevel();
-    }
+	private void NextLevel()
+	{
+		StartLevel();
+	}
 
 	void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.S))
-			Debug.Log(level.ToJson());
+#if UNITY_EDITOR
+		if (Input.GetKeyDown(KeyCode.L))
+			level.Load();
+		if (Input.GetKeyDown(KeyCode.S))
+			level.Save();
+#endif
+		if (Input.GetKeyDown(KeyCode.R))
+			Reset();
 	}
 }

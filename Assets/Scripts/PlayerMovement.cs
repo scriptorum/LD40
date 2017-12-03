@@ -55,9 +55,6 @@ public class PlayerMovement : MonoBehaviour
 
 		if ((sr.flipX && x > 0) || (!sr.flipX && x < 0))
 			sr.flipX = !sr.flipX;
-
-		if (Input.GetKey(KeyCode.R))
-			Reset();
 	}
 
 	private void Reset()

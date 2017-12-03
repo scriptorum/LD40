@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class Gold : MonoBehaviour
 {
-	void Awake()
-	{
-		Game.instance.level.numBags++;
-	}
+	public int weight = 1;
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
