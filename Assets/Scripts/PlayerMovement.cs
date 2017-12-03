@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-	public Transform groundCheck;
+	public Transform[] groundChecks;
 	private Rigidbody2D rb;
 	private SpriteRenderer sr;
 	private const float WEIGHT_PENALTY = 20f; // Higher numbers is more forgiving, do not go below max inventory size
@@ -15,21 +15,33 @@ public class PlayerMovement : MonoBehaviour
 	private float walkForce = 300f;
 	private float floatForce = 50f;
 	private float jumpForce = 525f;
-	private float lastOnGround = 0;
+	private bool onGround = true;
 	private bool jumping = false;
+	private bool wasOnGround= false;
 
-    void Awake()
+	void Awake()
 	{
 		gameObject.SelfAssign(ref rb);
 		gameObject.SelfAssign(ref sr);
-		groundCheck.ThrowIfNull();
+		Debug.Assert(groundChecks.Length > 0);
 	}
 
 	void Update()
 	{
-		jumping = Input.GetKey(KeyCode.Space);
-		if(Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground")))
-			lastOnGround = Time.realtimeSinceStartup;
+		onGround = false;
+		foreach (Transform gc in groundChecks)
+		{
+			if (Physics2D.Linecast(transform.position, gc.position, 1 << LayerMask.NameToLayer("Ground")))
+			{
+				onGround = true;
+				break;
+			}
+		}
+		
+		bool nowJumping = Input.GetKey(KeyCode.Space);
+		if(jumping != nowJumping)
+			Debug.Log("Jumping detected! OnGround:" + onGround + " playerPosition:" + transform.position);
+		jumping = jumping || nowJumping;
 	}
 
 	void FixedUpdate()
@@ -37,17 +49,18 @@ public class PlayerMovement : MonoBehaviour
 		float x = Input.GetAxis("Horizontal");
 		int weight = Inventory.instance.GetGoldWeight();
 
-		bool onGround = (Time.realtimeSinceStartup - lastOnGround) < 0.1f;
-		if (onGround && jumping && rb.velocity.y < 0.025f)
+		if (onGround && jumping)
 		{
 			rb.velocity = new Vector3(rb.velocity.x, 0f);
-            float actualJumpForce = jumpForce - weight * WEIGHT_PENALTY;
+			float actualJumpForce = jumpForce - weight * WEIGHT_PENALTY;
 			rb.AddForce(new Vector2(0f, actualJumpForce));
 			SoundManager.instance.PlayAs("jump", 1.2f - weight * 0.1f, 0.8f);
 			onGround = false;
 		}
+		else if(onGround && !wasOnGround) // landing
+			rb.velocity = new Vector3(0f, rb.velocity.y);
 
-	
+		// Debug.Log("OnGround:" + onGround + " jumping:" + jumping + " velocity:" + rb.velocity);
 
 		float curForce = onGround ? walkForce - weight * WEIGHT_PENALTY : floatForce;
 		rb.AddForce(Vector2.right * x * curForce);
@@ -57,6 +70,9 @@ public class PlayerMovement : MonoBehaviour
 
 		if ((sr.flipX && x > 0) || (!sr.flipX && x < 0))
 			sr.flipX = !sr.flipX;
+
+		wasOnGround = onGround;	
+		jumping = false;		
 	}
 
 	private void Reset()

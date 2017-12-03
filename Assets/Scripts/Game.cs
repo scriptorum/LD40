@@ -36,7 +36,6 @@ public class Game : MonoBehaviour
 		portal.Appear();
 		timer.SetTime(level.data.timer);
 		aq.Delay(0.9f);
-		aq.Log("Revealing player");
 		aq.Add(() =>
 		{
 			player.transform.position = portal.transform.position;
@@ -52,7 +51,6 @@ public class Game : MonoBehaviour
 		player.SetActive(false);
 		portal.Disappear();
 		aq.Delay(1f);
-		aq.Log("Escaped! Loading next level");
 		aq.Add(() => NextLevel());
 		aq.Run();
 	}
