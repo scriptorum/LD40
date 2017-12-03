@@ -28,9 +28,8 @@ public class Portal : MonoBehaviour
 
 	public void Disappear()
 	{
-		SoundManager.instance.Play("portal");
+		SoundManager.instance.Play("portalbye");
 		col.enabled = false;
 		tm.Play("disappear");
-
 	}
 }

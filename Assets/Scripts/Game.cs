@@ -41,18 +41,29 @@ public class Game : MonoBehaviour
 		aq.Delay(0.9f);
 		aq.Add(() =>
 		{
-			if(level.data.specialStart)
+			if (level.data.specialStart)
 				player.transform.position = new Vector3(-3, -3.74626f, 0);
 			else player.transform.position = portal.transform.position;
 			player.SetActive(true);
-			timer.StartTimer();
+			if (timer.gameObject.activeSelf) timer.StartTimer();
 		});
+		aq.Run();
+	}
+
+	public void TimeOut()
+	{
+		timer.gameObject.SetActive(false);
+		portal.Disappear();
+		message.SetMessage("You Ran Out Of Time");
+		aq.Delay(2f);
+		aq.Add(() => Reset());
 		aq.Run();
 	}
 
 	public void Escape()
 	{
-		timer.StopTimer();
+		if (timer.isActiveAndEnabled)
+			timer.StopTimer();
 		player.SetActive(false);
 		portal.Disappear();
 		aq.Delay(1f);
@@ -82,9 +93,9 @@ public class Game : MonoBehaviour
 			Reset();
 	}
 
-    private void SetLevel(int level)
-    {
+	private void SetLevel(int level)
+	{
 		this.level.level = level;
 		Reset();
-    }
+	}
 }

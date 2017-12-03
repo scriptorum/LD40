@@ -39,8 +39,6 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 		bool nowJumping = Input.GetKey(KeyCode.Space);
-		if (jumping != nowJumping)
-			Debug.Log("Jumping detected! OnGround:" + onGround + " playerPosition:" + transform.position);
 		jumping = jumping || nowJumping;
 	}
 

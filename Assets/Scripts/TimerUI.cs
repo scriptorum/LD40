@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using Spewnity;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TimerUI : MonoBehaviour
 {
 	public static TimerUI instance;
 	public TextMeshPro text;
 	public float time;
+	public UnityEvent onTimeOut;
 
 	void Awake()
 	{
@@ -22,6 +24,9 @@ public class TimerUI : MonoBehaviour
 	{
 		time -= Time.deltaTime;
 		UpdateView();
+		
+		if(time <= 0)
+			onTimeOut.Invoke();
 	}
 
 	private void UpdateView()
@@ -33,7 +38,6 @@ public class TimerUI : MonoBehaviour
 	internal void SetTime(int timer)
 	{
 		time = timer;
-		StopTimer();
 		UpdateView();
 	}
 
