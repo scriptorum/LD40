@@ -9,11 +9,11 @@ public class PlayerMovement : MonoBehaviour
 	public Transform groundCheck;
 	private Rigidbody2D rb;
 	private SpriteRenderer sr;
-	private const float WEIGHT_PENALTY = 15; // Higher numbers is more forgiving, do not go below max inventory size
+	private const float WEIGHT_PENALTY = 18; // Higher numbers is more forgiving, do not go below max inventory size
 	private const float maxSpeed = 5f;
-	private float walkForce = 200f;
-	private float floatForce = 50f;
-	private float jumpForce = 400f;
+	private float walkForce = 250f;
+	private float floatForce = 100f;
+	private float jumpForce = 600f;
 	private float lastOnGround = 0;
 	private bool jumping = false;
 

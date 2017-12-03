@@ -187,7 +187,7 @@ MonoBehaviour:
     type: 2}
   goldPrefab: {fileID: 1296114255962786, guid: 19fb424e3580048029388f8a47635778, type: 2}
   numBags: 0
-  level: 0
+  level: 1
   data:
     timer: 30
     platforms: []
@@ -70317,7 +70317,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0.5
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

@@ -10,7 +10,7 @@ public class Level : MonoBehaviour
 	public GameObject goldPrefab;
 
 	public int numBags = 0;
-	public int level = 0;
+	public int level = 1;
 
 	public LevelData data;
 
@@ -26,8 +26,7 @@ public class Level : MonoBehaviour
 
 	public void Load()
 	{
-		string path = "level1";
-		Debug.Log("Loading asset " + path);
+		string path = "level" + level.ToString();
 		transform.GetChild("Platforms").DestroyChildren();
 		transform.GetChild("Gold").DestroyChildren();
 		TextAsset asset = Resources.Load(path) as TextAsset;
@@ -50,6 +49,7 @@ public class Level : MonoBehaviour
 
 		portal.position = new Vector3(data.portal.x, data.portal.y);
 
+		int i = 0;
 		foreach (PlatformData pd in data.platforms)
 		{
 			GameObject pgo = platformPrefab.CreateChild(platforms);
@@ -58,22 +58,25 @@ public class Level : MonoBehaviour
 			BoxCollider2D pgocol = pgo.GetComponent<BoxCollider2D>();
 			pgocol.size = pd.size;
 			pgocol.offset = new Vector2(pgocol.offset.x, (pd.size.y - pd.size.y) / 2);
+			pgo.name = "platform" + i++;
 		}
 
 		numBags = 0;
+		i = 0;		
 		foreach (GoldData gd in data.gold)
 		{
 			GameObject ggo = goldPrefab.CreateChild(gold);
 			ggo.transform.localPosition = new Vector3(gd.position.x, gd.position.y);
 			ggo.GetComponent<Gold>().weight = gd.weight;
 			numBags++;
+			ggo.name = "gold" + i++;
 		}
 	}
 
 #if UNITY_EDITOR
 	public void Save()
 	{		
-		string path = "Assets/Resources/level1.json";
+		string path = "Assets/Resources/" + "level" + level.ToString() + ".json";
 		Debug.Log("Save level:" + path);
 		// System.IO.File.Delete(path);
 		System.IO.StreamWriter sw = System.IO.File.CreateText(path);

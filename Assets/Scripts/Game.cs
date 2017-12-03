@@ -25,22 +25,12 @@ public class Game : MonoBehaviour
 
 	void Start()
 	{
-		StartLevel();
+		Reset();
 	}
 
 	private void Reset()
 	{
-		RestartLevel();
-	}
-
-	private void StartLevel()
-	{
 		level.Load();
-		RestartLevel();
-	}
-
-	private void RestartLevel()
-	{
 		Inventory.instance.Reset();
 		player.SetActive(false);
 		portal.Appear();
@@ -69,7 +59,7 @@ public class Game : MonoBehaviour
 
 	private void NextLevel()
 	{
-		StartLevel();
+		SetLevel(level.level + 1);
 	}
 
 	void Update()
@@ -79,8 +69,19 @@ public class Game : MonoBehaviour
 			level.Load();
 		if (Input.GetKeyDown(KeyCode.S))
 			level.Save();
+		if (Input.GetKeyDown(KeyCode.LeftBracket))
+			SetLevel(level.level - 1);
+		if (Input.GetKeyDown(KeyCode.RightBracket))
+			SetLevel(level.level + 1);
+
 #endif
 		if (Input.GetKeyDown(KeyCode.R))
 			Reset();
 	}
+
+    private void SetLevel(int level)
+    {
+		this.level.level = level;
+		Reset();
+    }
 }
