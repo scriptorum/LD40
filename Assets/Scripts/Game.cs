@@ -11,6 +11,7 @@ public class Game : MonoBehaviour
 	public TimerUI timer;
 	public GameObject player;
 	public Level level;
+	public Message message;
 
 	private ActionQueue aq;
 
@@ -34,11 +35,15 @@ public class Game : MonoBehaviour
 		Inventory.instance.Reset();
 		player.SetActive(false);
 		portal.Appear();
+		timer.gameObject.SetActive(level.data.timer > 0);
 		timer.SetTime(level.data.timer);
+		message.SetMessage(level.data.message);
 		aq.Delay(0.9f);
 		aq.Add(() =>
 		{
-			player.transform.position = portal.transform.position;
+			if(level.data.specialStart)
+				player.transform.position = new Vector3(-3, -3.74626f, 0);
+			else player.transform.position = portal.transform.position;
 			player.SetActive(true);
 			timer.StartTimer();
 		});

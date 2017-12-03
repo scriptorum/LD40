@@ -94,6 +94,8 @@ public class Level : MonoBehaviour
 public class LevelData
 {
 	public int timer = 30;
+	public string message;
+	public bool specialStart = false;
 	public List<PlatformData> platforms;
 	public List<GoldData> gold;
 	public Vector2 portal;

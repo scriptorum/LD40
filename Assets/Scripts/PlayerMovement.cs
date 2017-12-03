@@ -14,10 +14,10 @@ public class PlayerMovement : MonoBehaviour
 	private const float maxSpeed = 5f;
 	private float walkForce = 300f;
 	private float floatForce = 50f;
-	private float jumpForce = 525f;
+	private float jumpForce = 600f;
 	private bool onGround = true;
 	private bool jumping = false;
-	private bool wasOnGround= false;
+	private bool wasOnGround = false;
 
 	void Awake()
 	{
@@ -37,9 +37,9 @@ public class PlayerMovement : MonoBehaviour
 				break;
 			}
 		}
-		
+
 		bool nowJumping = Input.GetKey(KeyCode.Space);
-		if(jumping != nowJumping)
+		if (jumping != nowJumping)
 			Debug.Log("Jumping detected! OnGround:" + onGround + " playerPosition:" + transform.position);
 		jumping = jumping || nowJumping;
 	}
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 		float x = Input.GetAxis("Horizontal");
 		int weight = Inventory.instance.GetGoldWeight();
 
-		if (onGround && jumping)
+		if (onGround && jumping && rb.velocity.y < 0.1f)
 		{
 			rb.velocity = new Vector3(rb.velocity.x, 0f);
 			float actualJumpForce = jumpForce - weight * WEIGHT_PENALTY;
@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
 			SoundManager.instance.PlayAs("jump", 1.2f - weight * 0.1f, 0.8f);
 			onGround = false;
 		}
-		else if(onGround && !wasOnGround) // landing
+		else if (onGround && !wasOnGround) // landing
 			rb.velocity = new Vector3(0f, rb.velocity.y);
 
 		// Debug.Log("OnGround:" + onGround + " jumping:" + jumping + " velocity:" + rb.velocity);
@@ -71,8 +71,8 @@ public class PlayerMovement : MonoBehaviour
 		if ((sr.flipX && x > 0) || (!sr.flipX && x < 0))
 			sr.flipX = !sr.flipX;
 
-		wasOnGround = onGround;	
-		jumping = false;		
+		wasOnGround = onGround;
+		jumping = false;
 	}
 
 	private void Reset()
