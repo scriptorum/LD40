@@ -13,7 +13,6 @@ public class Level : MonoBehaviour
 	public int level = 0;
 
 	public LevelData data;
-	private TextAsset asset;
 
 	#if UNITY_EDITOR
 	void OnValidate()
@@ -31,7 +30,7 @@ public class Level : MonoBehaviour
 		Debug.Log("Loading asset " + path);
 		transform.GetChild("Platforms").DestroyChildren();
 		transform.GetChild("Gold").DestroyChildren();
-		asset = Resources.Load(path) as TextAsset;
+		TextAsset asset = Resources.Load(path) as TextAsset;
 		data = JsonUtility.FromJson<LevelData>(asset.text);
 		ProcessLevelData();
 	}
@@ -71,17 +70,20 @@ public class Level : MonoBehaviour
 		}
 	}
 
+#if UNITY_EDITOR
 	public void Save()
 	{		
-		Resources.UnloadAsset(asset);
 		string path = "Assets/Resources/level1.json";
 		Debug.Log("Save level:" + path);
-		System.IO.File.Delete(path);
+		// System.IO.File.Delete(path);
 		System.IO.StreamWriter sw = System.IO.File.CreateText(path);
 		string json = JsonUtility.ToJson(data);
 		sw.Write(json);
 		sw.Close();
+
+		UnityEditor.AssetDatabase.Refresh();
 	}
+#endif
 
 }
 
