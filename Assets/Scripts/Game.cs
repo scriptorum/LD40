@@ -57,4 +57,10 @@ public class Game : MonoBehaviour
     {
         StartLevel();
     }
+
+	void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.S))
+			Debug.Log(level.ToJson());
+	}
 }

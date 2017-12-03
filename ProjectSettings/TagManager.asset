@@ -6,6 +6,7 @@ TagManager:
   tags:
   - gold
   - portal
+  - platform
   layers:
   - Default
   - TransparentFX

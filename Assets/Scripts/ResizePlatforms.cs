@@ -18,8 +18,11 @@ public class ResizePlatforms : MonoBehaviour
 	void Start()
 	{
 		sr.size = transform.localScale;
+        const float precision = 10f;
+        sr.size = new Vector2(Mathf.Round(transform.localScale.x * precision) / precision, Mathf.Round(transform.localScale.y * precision) / precision);
 		col.size = new Vector2(col.size.x * sr.size.x, col.size.y);
 		col.offset = new Vector2(col.offset.x, (sr.size.y - col.size.y) / 2);
 		transform.localScale = Vector3.one;
+        transform.localPosition = new Vector3(Mathf.Round(transform.localPosition.x * precision) / precision, Mathf.Round(transform.localPosition.y * precision) / precision, Mathf.Round(transform.localPosition.z * precision) / precision);
 	}
 }
