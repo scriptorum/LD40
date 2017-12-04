@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 	private const float WEIGHT_PENALTY_TO_MAX_SPEED = 0.4f;
 	private const float maxSpeed = 5f;
 	private float walkForce = 300f;
-	private float floatForce = 50f;
+	private float floatForce = 150f;
 	private float jumpForce = 600f;
 	private bool onGround = true;
 	private bool jumping = false;
@@ -57,8 +57,8 @@ public class PlayerMovement : MonoBehaviour
 		}
 		else if (onGround && !wasOnGround) // landing
 			rb.velocity = new Vector3(0f, rb.velocity.y);
-		else if (onGround && x==0)
-			rb.velocity = new Vector3(0f, rb.velocity.y);
+		// else if (onGround && x==0)
+		// 	rb.velocity = new Vector3(0f, rb.velocity.y);
 
 
 		// Debug.Log("OnGround:" + onGround + " jumping:" + jumping + " velocity:" + rb.velocity);
