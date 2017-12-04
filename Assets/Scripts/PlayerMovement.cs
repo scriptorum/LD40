@@ -57,6 +57,9 @@ public class PlayerMovement : MonoBehaviour
 		}
 		else if (onGround && !wasOnGround) // landing
 			rb.velocity = new Vector3(0f, rb.velocity.y);
+		else if (onGround && x==0)
+			rb.velocity = new Vector3(0f, rb.velocity.y);
+
 
 		// Debug.Log("OnGround:" + onGround + " jumping:" + jumping + " velocity:" + rb.velocity);
 
