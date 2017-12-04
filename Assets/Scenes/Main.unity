@@ -477,6 +477,80 @@ Transform:
   m_Father: {fileID: 1928096830}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &943901374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 943901376}
+  - component: {fileID: 943901375}
+  - component: {fileID: 943901377}
+  m_Layer: 0
+  m_Name: AutoPlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &943901375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 943901374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a70d6af65ca4cc5be7c8f272bcdf8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPoolSize: 1
+  minPoolSize: 1
+  defaultAudioMixerGroup: {fileID: 0}
+  sounds:
+  - name: song
+    livePreview: 0
+    clips:
+    - {fileID: 8300000, guid: 535488f42481246dba2992a2363fecc2, type: 3}
+    pitch: 1
+    pitchVariation: 0
+    volume: 1
+    volumeVariation: 0
+    pan: 0
+    panVariation: 0
+    looping: 1
+    usePool: 0
+    multi: 0
+    delay: 0
+    source: {fileID: 0}
+    group: {fileID: 0}
+  dontDestroyOnLoad: 0
+  soundsInitialized: 1
+--- !u!4 &943901376
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 943901374}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.9330072, y: 0.08403328, z: 0.8810818}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &943901377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 943901374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f43fe6c62c340ed9f8c801c4ca666a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &965756472
 GameObject:
   m_ObjectHideFlags: 0

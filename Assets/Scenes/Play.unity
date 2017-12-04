@@ -70685,8 +70685,8 @@ MonoBehaviour:
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
-  m_isRichText: 0
-  m_parseCtrlCharacters: 1
+  m_isRichText: 1
+  m_parseCtrlCharacters: 0
   m_isOrthographic: 0
   m_isCullingEnabled: 0
   m_ignoreRectMaskCulling: 0
@@ -71232,6 +71232,22 @@ MonoBehaviour:
     panVariation: 0
     looping: 0
     usePool: 1
+    multi: 0
+    delay: 0
+    source: {fileID: 0}
+    group: {fileID: 0}
+  - name: song
+    livePreview: 0
+    clips:
+    - {fileID: 8300000, guid: 468eaf316d79b431189714ffc859b4e0, type: 3}
+    pitch: 1
+    pitchVariation: 0
+    volume: 1
+    volumeVariation: 0
+    pan: 0
+    panVariation: 0
+    looping: 1
+    usePool: 0
     multi: 0
     delay: 0
     source: {fileID: 0}

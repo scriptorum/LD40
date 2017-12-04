@@ -26,6 +26,7 @@ public class Game : MonoBehaviour
 
 	void Start()
 	{
+		Spewnity.SoundManager.instance.Play("song");
 		Reset();
 	}
 
