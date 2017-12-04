@@ -12,6 +12,7 @@ public class Game : MonoBehaviour
 	public GameObject player;
 	public Level level;
 	public Message message;
+	public ParticleSystem playerPS;
 
 	private ActionQueue aq;
 
@@ -46,6 +47,7 @@ public class Game : MonoBehaviour
 				player.transform.position = new Vector3(-3, -3.74626f, 0);
 			else player.transform.position = portal.transform.position;
 			player.SetActive(true);
+			playerPS.Play();
 			if (timer.gameObject.activeSelf) timer.StartTimer();
 		});
 		aq.Run();
